@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cl04b6g4ci4kc"]
+
+[ext_resource type="Script" uid="uid://3o6tt7dhipyc" path="res://Scripts/hidden_block.gd" id="1_me6ix"]
+[ext_resource type="Texture2D" uid="uid://dxud3vwihfjjn" path="res://Assets/Tilemap/tilemap_packed.png" id="1_yl247"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5yw3"]
+atlas = ExtResource("1_yl247")
+region = Rect2(162, 18, 18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwy4h"]
+size = Vector2(18, 18)
+
+[node name="HiddenBlock" type="StaticBody2D" unique_id=1340034468]
+script = ExtResource("1_me6ix")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1653676419]
+texture = SubResource("AtlasTexture_j5yw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1450350572]
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_iwy4h")
+one_way_collision = true

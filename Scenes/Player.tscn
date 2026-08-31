@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://ourgfjf251c0"]
+
+[ext_resource type="Texture2D" uid="uid://b84l4cy1jj7me" path="res://Assets/idle_stickman/fighter_Idle_0001.png" id="1_bhhdu"]
+[ext_resource type="Script" uid="uid://ogrcsic6tqrx" path="res://Scripts/player.gd" id="1_megsn"]
+[ext_resource type="Texture2D" uid="uid://d07i03dhixpkw" path="res://Assets/idle_stickman/fighter_Idle_0002.png" id="2_megsn"]
+[ext_resource type="Texture2D" uid="uid://be35d6p6jw8ce" path="res://Assets/idle_stickman/fighter_Idle_0003.png" id="3_yoq75"]
+[ext_resource type="Texture2D" uid="uid://cpxdewwx2k43s" path="res://Assets/idle_stickman/fighter_Idle_0004.png" id="4_ksbbd"]
+[ext_resource type="Texture2D" uid="uid://c04s7itr0yvld" path="res://Assets/idle_stickman/fighter_Idle_0005.png" id="5_glx4g"]
+[ext_resource type="Texture2D" uid="uid://c4ljjtuxlanwa" path="res://Assets/idle_stickman/fighter_Idle_0006.png" id="6_miouo"]
+[ext_resource type="Texture2D" uid="uid://qo8ibh5ckah4" path="res://Assets/idle_stickman/fighter_Idle_0007.png" id="7_o3h8g"]
+[ext_resource type="Texture2D" uid="uid://c3huoe56s52do" path="res://Assets/idle_stickman/fighter_Idle_0008.png" id="8_1e7my"]
+[ext_resource type="Texture2D" uid="uid://d4hpw7luphkwq" path="res://Assets/run_stickman/fighter_run_0017.png" id="10_lslt6"]
+[ext_resource type="Texture2D" uid="uid://dgw41nl62y1mx" path="res://Assets/run_stickman/fighter_run_0018.png" id="11_ulo2v"]
+[ext_resource type="Texture2D" uid="uid://dpr8yjhtphy7k" path="res://Assets/run_stickman/fighter_run_0019.png" id="12_1iu4k"]
+[ext_resource type="Texture2D" uid="uid://cm3tcfq2u615b" path="res://Assets/run_stickman/fighter_run_0020.png" id="13_m0x7a"]
+[ext_resource type="Texture2D" uid="uid://hcunmksorbm6" path="res://Assets/run_stickman/fighter_run_0021.png" id="14_5v66d"]
+[ext_resource type="Texture2D" uid="uid://dn33hpmhj4dsf" path="res://Assets/run_stickman/fighter_run_0022.png" id="15_x63xi"]
+[ext_resource type="Texture2D" uid="uid://bv330ofgi3gkt" path="res://Assets/run_stickman/fighter_run_0023.png" id="16_i2e8t"]
+[ext_resource type="Texture2D" uid="uid://bjyp8yhuvb13v" path="res://Assets/run_stickman/fighter_run_0024.png" id="17_qidb7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mjupf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bhhdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_megsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yoq75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ksbbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_glx4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_miouo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o3h8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1e7my")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_lslt6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ulo2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1iu4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_m0x7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5v66d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_x63xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_i2e8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_qidb7")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iukft"]
+radius = 9.0
+height = 31.0
+
+[node name="Player_idle" type="CharacterBody2D" unique_id=312487378]
+script = ExtResource("1_megsn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=753169140]
+position = Vector2(334.625, 431.5)
+scale = Vector2(0.16552736, 0.18945314)
+sprite_frames = SubResource("SpriteFrames_mjupf")
+animation = &"run"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.5864485
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=144321617]
+position = Vector2(334, 440)
+shape = SubResource("CapsuleShape2D_iukft")
