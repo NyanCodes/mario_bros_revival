@@ -83,18 +83,17 @@ animations = [{
 radius = 9.0
 height = 31.0
 
-[node name="Player_idle" type="CharacterBody2D" unique_id=312487378]
+[node name="Player" type="CharacterBody2D" unique_id=312487378]
+floor_snap_length = 4.0
 script = ExtResource("1_megsn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=753169140]
-position = Vector2(334.625, 431.5)
+position = Vector2(0.625, -24)
 scale = Vector2(0.16552736, 0.18945314)
 sprite_frames = SubResource("SpriteFrames_mjupf")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.5864485
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=144321617]
-position = Vector2(334, 440)
+position = Vector2(0, -15.5)
 shape = SubResource("CapsuleShape2D_iukft")

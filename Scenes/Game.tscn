@@ -136,10 +136,10 @@ size = Vector2(78, 20)
 [node name="Game" type="Node2D" unique_id=930858465]
 
 [node name="Player_idle" parent="." unique_id=312487378 instance=ExtResource("1_iukft")]
-position = Vector2(127, -42.27)
+position = Vector2(461, 413.23)
 
 [node name="Camera2D" type="Camera2D" parent="Player_idle" unique_id=1789074443]
-position = Vector2(374, 372.27)
+position = Vector2(0, -30)
 zoom = Vector2(3, 3)
 limit_left = -9999996
 limit_top = -9999961
