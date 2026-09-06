@@ -26,8 +26,13 @@ const JUMP_BUFFER := 0.12         # jump pressed just before landing still count
 # design - it carries over into the respawn.
 const RESPAWN_DELAY := 1.2
 
+## Three hits and the run is over, like the lives counter in the original.
+const MAX_HEALTH := 3
+
 signal died
 signal respawned
+signal health_changed(current: int, maximum: int)
+signal game_over
 
 @onready var _anim: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -36,10 +41,12 @@ var _coyote := 0.0
 var _buffer := 0.0
 var _dead := false
 var _was_grounded := true
+var _health := MAX_HEALTH
 
 
 func _ready() -> void:
 	_spawn_point = global_position
+	health_changed.emit(_health, MAX_HEALTH)
 
 
 func _physics_process(delta: float) -> void:
@@ -137,6 +144,8 @@ func die() -> void:
 	if _dead:
 		return
 	_dead = true
+	_health -= 1
+	health_changed.emit(_health, MAX_HEALTH)
 	Audio.sfx(&"death", 0.0, 0.03)
 	Audio.stop_music()
 	died.emit()
@@ -144,6 +153,13 @@ func die() -> void:
 	set_physics_process(false)
 	if _anim.sprite_frames.has_animation("hit"):
 		_anim.play("hit")
+
+	# Out of hearts: stay down and let the stage handle the restart, so this
+	# node is not mid-await when the scene is reloaded out from under it.
+	if _health <= 0:
+		game_over.emit()
+		return
+
 	await get_tree().create_timer(RESPAWN_DELAY).timeout
 	respawn()
 

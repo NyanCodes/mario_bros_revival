@@ -1,0 +1,137 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://Assets/UI/menu_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" uid="uid://b410bwee5gxey" path="res://Assets/Backgrounds/sky_blue.png" id="3_bg"]
+[ext_resource type="Texture2D" path="res://Assets/UI/fruit.png" id="4_fruit"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_menu")
+
+[node name="Sky" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+stretch_mode = 1
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043, 0.054, 0.078, 0.35)
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -190.0
+offset_right = 260.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.898, 0.529, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 56
+text = "MARIO BROS
+REVIVAL"
+horizontal_alignment = 1
+
+[node name="Fruit" type="TextureRect" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_fruit")
+stretch_mode = 3
+
+[node name="Spacer" type="Control" parent="Menu"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Start" type="Button" parent="Menu/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(300, 0)
+text = "START GAME"
+
+[node name="Controls" type="Button" parent="Menu/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(300, 0)
+text = "CONTROLS"
+
+[node name="Quit" type="Button" parent="Menu/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(300, 0)
+text = "QUIT"
+
+[node name="ControlsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -180.0
+offset_right = 230.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="ControlsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Heading" type="Label" parent="ControlsPanel/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.898, 0.529, 1)
+theme_override_font_sizes/font_size = 34
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="Keys" type="GridContainer" parent="ControlsPanel/Box"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 14
+columns = 2
+
+[node name="Hint" type="Label" parent="ControlsPanel/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Land on an enemy's head to stomp it.
+Anything else that touches you costs a heart."
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="ControlsPanel/Box"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(220, 0)
+text = "BACK"

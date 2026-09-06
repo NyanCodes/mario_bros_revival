@@ -39,6 +39,7 @@ func _fire() -> void:
 	shot.position = position + muzzle
 	get_parent().add_child(shot)
 	_anim.play("fire")
+	Audio.sfx(&"cannon", -8.0)
 
 
 func reset() -> void:

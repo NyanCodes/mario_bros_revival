@@ -32,6 +32,7 @@ const MUSIC := {
 var _pool: Array[AudioStreamPlayer] = []
 var _next := 0
 var _music: AudioStreamPlayer
+var _music_name := &""
 
 
 func _ready() -> void:
@@ -74,12 +75,18 @@ func play_music(name: StringName, volume_db := -11.0) -> void:
 	if stream == null:
 		push_warning("Audio.play_music: no track named '%s'" % name)
 		return
+	# Menu to stage, and stage to stage, share a track. Restarting it there
+	# would snap the music back to bar one on every scene change.
+	if _music.playing and _music_name == name:
+		return
+	_music_name = name
 	_music.stream = _looped(stream)
 	_music.volume_db = volume_db
 	_music.play()
 
 
 func stop_music() -> void:
+	_music_name = &""
 	_music.stop()
 
 
