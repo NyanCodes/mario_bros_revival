@@ -1,0 +1,192 @@
+[gd_scene load_steps=29 format=3]
+
+[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/PixelAdventure/Items/Fruits/Apple.png" id="2_fruit"]
+[ext_resource type="Texture2D" path="res://Assets/PixelAdventure/Items/Fruits/Collected.png" id="3_pop"]
+
+[sub_resource type="AtlasTexture" id="A2_fruit_0"]
+atlas = ExtResource("2_fruit")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_1"]
+atlas = ExtResource("2_fruit")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_2"]
+atlas = ExtResource("2_fruit")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_3"]
+atlas = ExtResource("2_fruit")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_4"]
+atlas = ExtResource("2_fruit")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_5"]
+atlas = ExtResource("2_fruit")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_6"]
+atlas = ExtResource("2_fruit")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_7"]
+atlas = ExtResource("2_fruit")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_8"]
+atlas = ExtResource("2_fruit")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_9"]
+atlas = ExtResource("2_fruit")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_10"]
+atlas = ExtResource("2_fruit")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_11"]
+atlas = ExtResource("2_fruit")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_12"]
+atlas = ExtResource("2_fruit")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_13"]
+atlas = ExtResource("2_fruit")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_14"]
+atlas = ExtResource("2_fruit")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_15"]
+atlas = ExtResource("2_fruit")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A2_fruit_16"]
+atlas = ExtResource("2_fruit")
+region = Rect2(512, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A3_pop_0"]
+atlas = ExtResource("3_pop")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A3_pop_1"]
+atlas = ExtResource("3_pop")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A3_pop_2"]
+atlas = ExtResource("3_pop")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A3_pop_3"]
+atlas = ExtResource("3_pop")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A3_pop_4"]
+atlas = ExtResource("3_pop")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="A3_pop_5"]
+atlas = ExtResource("3_pop")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SF_coin"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A2_fruit_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_fruit_16")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A3_pop_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_pop_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_pop_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_pop_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_pop_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_pop_5")
+}],
+"loop": false,
+"name": &"collected",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CS_coin"]
+radius = 8.0
+
+[node name="Coin" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SF_coin")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CS_coin")

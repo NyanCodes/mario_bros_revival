@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Cannon/Cannon Ball Idle/1.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CS"]
+radius = 5.0
+
+[node name="CannonBall" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CS")

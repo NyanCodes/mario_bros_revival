@@ -1,0 +1,110 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/PixelAdventure/Items/Checkpoints/Checkpoint/Checkpoint (No Flag).png" id="2_no"]
+[ext_resource type="Texture2D" path="res://Assets/PixelAdventure/Items/Checkpoints/Checkpoint/Checkpoint (Flag Idle)(64x64).png" id="3_flag"]
+
+[sub_resource type="AtlasTexture" id="A2_no_0"]
+atlas = ExtResource("2_no")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_0"]
+atlas = ExtResource("3_flag")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_1"]
+atlas = ExtResource("3_flag")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_2"]
+atlas = ExtResource("3_flag")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_3"]
+atlas = ExtResource("3_flag")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_4"]
+atlas = ExtResource("3_flag")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_5"]
+atlas = ExtResource("3_flag")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_6"]
+atlas = ExtResource("3_flag")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_7"]
+atlas = ExtResource("3_flag")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_8"]
+atlas = ExtResource("3_flag")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="A3_flag_9"]
+atlas = ExtResource("3_flag")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SF_cp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A2_no_0")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A3_flag_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("A3_flag_9")
+}],
+"loop": true,
+"name": &"out",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RS_cp"]
+size = Vector2(16, 56)
+
+[node name="Checkpoint" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SF_cp")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RS_cp")
