@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://Scripts/enemy_shooter.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://Scenes/Props/Pearl.tscn" id="2_shot"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Idle/1.png" id="3_i0"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Fire/1.png" id="4_f0"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Fire/2.png" id="4_f1"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Fire/3.png" id="4_f2"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Fire/4.png" id="4_f3"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Fire/5.png" id="4_f4"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/Shooters/Seashell/Seashell Fire/6.png" id="4_f5"]
+
+[sub_resource type="SpriteFrames" id="SF"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f5")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 16.0
+}]
+
+[node name="Seashell" type="Node2D"]
+script = ExtResource("1_script")
+projectile = ExtResource("2_shot")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -19.0)
+sprite_frames = SubResource("SF")
+animation = &"idle"
+autoplay = "idle"

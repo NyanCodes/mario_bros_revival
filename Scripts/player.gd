@@ -21,7 +21,13 @@ const MAX_FALL_SPEED := 600.0
 const COYOTE_TIME := 0.10         # jump still works just after leaving a ledge
 const JUMP_BUFFER := 0.12         # jump pressed just before landing still counts
 
-const RESPAWN_DELAY := 0.5
+# Long enough to read the death counter, short enough that fifty deaths do
+# not cost a minute and a half of staring. The death sting outlives it by
+# design - it carries over into the respawn.
+const RESPAWN_DELAY := 1.2
+
+signal died
+signal respawned
 
 @onready var _anim: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -29,6 +35,7 @@ var _spawn_point: Vector2
 var _coyote := 0.0
 var _buffer := 0.0
 var _dead := false
+var _was_grounded := true
 
 
 func _ready() -> void:
@@ -43,6 +50,7 @@ func _physics_process(delta: float) -> void:
 	_apply_walk(direction, delta)
 
 	move_and_slide()
+	_report_landing()
 	_report_hits()
 	_update_animation(direction)
 
@@ -65,6 +73,7 @@ func _apply_jump(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		_buffer = 0.0
 		_coyote = 0.0
+		Audio.sfx(&"jump")
 
 	# Letting go early cuts the jump short, so a tap gives a small hop.
 	if Input.is_action_just_released("jump") and velocity.y < 0.0:
@@ -79,6 +88,14 @@ func _apply_walk(direction: float, delta: float) -> void:
 	else:
 		var friction := FRICTION_GROUND if grounded else FRICTION_AIR
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+
+
+## One thud on the frame the player touches down, not every frame after.
+func _report_landing() -> void:
+	var grounded := is_on_floor()
+	if grounded and not _was_grounded and not _dead:
+		Audio.sfx(&"land", -7.0)
+	_was_grounded = grounded
 
 
 ## Lets blocks react to being bumped (see hidden_block.gd).
@@ -103,13 +120,15 @@ func _update_animation(direction: float) -> void:
 
 	var next := "idle"
 	if not is_on_floor():
-		next = "jump"
+		next = "jump" if velocity.y < 0.0 else "fall"
 	elif direction != 0.0:
 		next = "run"
 
-	# There is no jump animation yet — fall back to idle rather than erroring.
-	if not _anim.sprite_frames.has_animation(next):
-		next = "idle"
+	# Not every player scene defines every state — walk down to one that exists.
+	for candidate in [next, "jump", "idle"]:
+		if _anim.sprite_frames.has_animation(candidate):
+			next = candidate
+			break
 
 	_anim.play(next)
 
@@ -118,19 +137,36 @@ func die() -> void:
 	if _dead:
 		return
 	_dead = true
+	Audio.sfx(&"death", 0.0, 0.03)
+	Audio.stop_music()
+	died.emit()
 	velocity = Vector2.ZERO
 	set_physics_process(false)
+	if _anim.sprite_frames.has_animation("hit"):
+		_anim.play("hit")
+
 	await get_tree().create_timer(RESPAWN_DELAY).timeout
 	respawn()
 
 
+## Death does not reload the scene, so anything the player changed on the way
+## through has to be put back by hand. Blocks and other one-shot props join the
+## "resettable" group and define reset() (see hidden_block.gd).
 func respawn() -> void:
 	global_position = _spawn_point
 	velocity = Vector2.ZERO
 	_coyote = 0.0
 	_buffer = 0.0
 	_dead = false
+	get_tree().call_group(HiddenBlock.RESET_GROUP, "reset")
 	set_physics_process(true)
+	Audio.play_music(&"stage1")
+	respawned.emit()
+
+
+## Checkpoints call this to move where death sends the player back to.
+func set_spawn(point: Vector2) -> void:
+	_spawn_point = point
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:

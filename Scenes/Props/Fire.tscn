@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://Scripts/hazard.gd" id="1_script"]
+[ext_resource type="Script" path="res://Scripts/loop_player.gd" id="90_loop"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/fire_loop.wav" id="91_snd"]
+[ext_resource type="Texture2D" path="res://Assets/PixelAdventure/Traps/Fire/On (16x32).png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="A2_tex_0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="A2_tex_1"]
+atlas = ExtResource("2_tex")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="A2_tex_2"]
+atlas = ExtResource("2_tex")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SF_fire"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A2_tex_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_2")
+}],
+"loop": true,
+"name": &"burn",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RS_fire"]
+size = Vector2(12, 22)
+
+[node name="Fire" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SF_fire")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("RS_fire")
+
+[node name="Ambient" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("91_snd")
+volume_db = -12.0
+max_distance = 180.0
+attenuation = 2.0
+script = ExtResource("90_loop")

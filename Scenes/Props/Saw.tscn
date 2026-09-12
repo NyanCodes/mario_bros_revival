@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://Scripts/hazard.gd" id="1_script"]
+[ext_resource type="Script" path="res://Scripts/loop_player.gd" id="90_loop"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/saw_loop.wav" id="91_snd"]
+[ext_resource type="Texture2D" path="res://Assets/PixelAdventure/Traps/Saw/On (38x38).png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="A2_tex_0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_1"]
+atlas = ExtResource("2_tex")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_2"]
+atlas = ExtResource("2_tex")
+region = Rect2(76, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_3"]
+atlas = ExtResource("2_tex")
+region = Rect2(114, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_4"]
+atlas = ExtResource("2_tex")
+region = Rect2(152, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_5"]
+atlas = ExtResource("2_tex")
+region = Rect2(190, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_6"]
+atlas = ExtResource("2_tex")
+region = Rect2(228, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="A2_tex_7"]
+atlas = ExtResource("2_tex")
+region = Rect2(266, 0, 38, 38)
+
+[sub_resource type="SpriteFrames" id="SF_saw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("A2_tex_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("A2_tex_7")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CS_saw"]
+radius = 15.0
+
+[node name="Saw" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SF_saw")
+animation = &"spin"
+autoplay = "spin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CS_saw")
+
+[node name="Ambient" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("91_snd")
+volume_db = -9.0
+max_distance = 260.0
+attenuation = 2.0
+script = ExtResource("90_loop")

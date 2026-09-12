@@ -22,3 +22,6 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Claude Code project instructions (local only)
+CLAUDE.md
