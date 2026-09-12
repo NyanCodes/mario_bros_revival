@@ -15,10 +15,20 @@ const RESET_GROUP := "resettable"
 @onready var _anim: AnimatedSprite2D = $AnimatedSprite2D
 
 var _clock := 0.0
+var _fire_audio: AudioStreamPlayer2D
 
 
 func _ready() -> void:
 	add_to_group(RESET_GROUP)
+	# Shots belong to their emplacement: distant shooters must not sound
+	# like repeated impacts next to the player throughout the whole level.
+	_fire_audio = AudioStreamPlayer2D.new()
+	_fire_audio.stream = Audio.SOUNDS[&"cannon"]
+	_fire_audio.bus = &"SFX"
+	_fire_audio.volume_db = -8.0
+	_fire_audio.max_distance = 640.0
+	_fire_audio.position = muzzle
+	add_child(_fire_audio)
 	_anim.flip_h = travel.x > 0.0
 	reset()
 
@@ -39,7 +49,8 @@ func _fire() -> void:
 	shot.position = position + muzzle
 	get_parent().add_child(shot)
 	_anim.play("fire")
-	Audio.sfx(&"cannon", -8.0)
+	_fire_audio.pitch_scale = 1.0 + randf_range(-0.08, 0.08)
+	_fire_audio.play()
 
 
 func reset() -> void:

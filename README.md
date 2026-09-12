@@ -24,6 +24,17 @@ git-ignored on purpose — never commit it.
 
 Coins, enemies, power-ups, the goal flag and Stages 2-3 are not built yet.
 
+## Quick level testing
+
+`Scenes/Stage1.tscn` and `Scenes/Stage2.tscn` are independent, shorter levels.
+Open either scene and choose **Run Current Scene** (`Cmd + R` on macOS,
+`F6` on Windows/Linux). The normal Run button currently launches Stage 2
+for testing; the main menu's Play button launches Stage 1.
+
+Stage 1 is 4,480 pixels wide and ends at its own finish flag. Stage 2 is
+4,544 pixels wide and contains only the later section, starting at x=0.
+Both retain checkpoints and unlimited respawns. Edit each level in its own scene.
+
 ## Controls
 
 | Action | Keys                    |

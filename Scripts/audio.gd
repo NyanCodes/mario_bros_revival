@@ -11,6 +11,8 @@ extends Node
 ## what make game audio grating.
 
 const POOL_SIZE := 14
+const SETTINGS_PATH := "user://audio_settings.cfg"
+const VOLUME_BUSES := [&"Master", &"Music", &"SFX"]
 
 const SOUNDS := {
 	&"jump": preload("res://Assets/Audio/jump.wav"),
@@ -45,6 +47,7 @@ func _ready() -> void:
 	_music = AudioStreamPlayer.new()
 	_music.bus = &"Music"
 	add_child(_music)
+	load_volume_settings()
 
 
 ## `spread` is the pitch jitter, ±fraction. Pass 0.0 for sounds that must
@@ -66,6 +69,30 @@ func set_bus_volume(bus: StringName, linear: float) -> void:
 	var i := AudioServer.get_bus_index(bus)
 	if i >= 0:
 		AudioServer.set_bus_volume_db(i, linear_to_db(clampf(linear, 0.0, 1.0)))
+
+
+func get_bus_volume(bus: StringName) -> float:
+	var i := AudioServer.get_bus_index(bus)
+	return db_to_linear(AudioServer.get_bus_volume_db(i)) if i >= 0 else 1.0
+
+
+func load_volume_settings() -> void:
+	var config := ConfigFile.new()
+	if config.load(SETTINGS_PATH) != OK:
+		return
+	for bus in VOLUME_BUSES:
+		var value = config.get_value("volume", bus, 1.0)
+		if (value is float or value is int) and is_finite(float(value)):
+			set_bus_volume(bus, float(value))
+
+
+func save_volume_settings() -> void:
+	var config := ConfigFile.new()
+	for bus in VOLUME_BUSES:
+		config.set_value("volume", bus, get_bus_volume(bus))
+	var error := config.save(SETTINGS_PATH)
+	if error != OK:
+		push_warning("Could not save volume settings: %s" % error_string(error))
 
 
 ## Starts a looping track on the Music bus. Each stage can name its own, so

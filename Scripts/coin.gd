@@ -1,12 +1,11 @@
 class_name Coin
 extends Area2D
 
-## A fruit pickup. Joins the "resettable" group, so dying restores every fruit
-## along with the blocks (see player.gd::respawn).
+## A fruit pickup. Collected fruit stays taken across respawns, so each fruit
+## counts once per run. Reloading the scene starts a fresh collection.
 
 signal collected(coin: Coin)
 
-const RESET_GROUP := "resettable"
 const COIN_GROUP := "coins"
 
 @onready var _anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -16,7 +15,6 @@ var _taken := false
 
 
 func _ready() -> void:
-	add_to_group(RESET_GROUP)
 	add_to_group(COIN_GROUP)
 	body_entered.connect(_on_body_entered)
 	_anim.animation_finished.connect(_on_anim_finished)
